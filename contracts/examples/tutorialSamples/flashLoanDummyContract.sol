@@ -171,7 +171,7 @@ library SafeMath {
 
 
 contract flashIt{
-    
+
     function executeOperation(
         address _reserve,
         uint256 _amount,
@@ -182,13 +182,13 @@ contract flashIt{
     ERC20 theToken = ERC20(_reserve);
         //check the contract has the specified balance
         /*
-        require(_amount <= getBalanceInternal(address(this), _reserve), 
+        require(_amount <= getBalanceInternal(address(this), _reserve),
             "Invalid balance for the contract");
     */
-      
+       //trades go here
+
         //transferFundsBackToPoolInternal(_reserve, _amount.add(_fee));
         theToken.transfer(0x3dfd23a6c5e8bbcfc9581d2e864a68feb6a076d3, (_amount+ _fee));
-    
+
     }
 }
-
