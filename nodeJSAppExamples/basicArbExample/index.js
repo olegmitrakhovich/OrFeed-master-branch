@@ -27,8 +27,8 @@ Web3 = require("web3");
 
 web3 = new Web3('https://mainnet.infura.io/v3/ed07e65b44354a48aa1f5547369fb513'); //change this
 
-var saiPriceBuyUniswap = 0;
-var saiPriceSellKyber = 0;
+var saiPriceSellUniswap = 0;
+var saiPriceBuyKyber = 0;
 var currentlyTrading= false;
 
 
@@ -45,7 +45,7 @@ app.use(cors({credentials: true, origin: '*'}));
  app.get("/", function(req, res) {
 
 
-  res.send({ uniswapBuy: saiPriceBuyUniswap, kyberSell: saiPriceSellKyber });
+  res.send({ uniswapBuy: saiPriceSellUniswap, kyberSell: saiPriceBuyKyber });
 
  })
 
@@ -65,23 +65,23 @@ function getPrices(){
   arbAbi = [{"constant":true,"inputs":[],"name":"getUniswapBuyPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getKyberSellPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawETHAndTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"fromAddress","type":"address"},{"name":"uniSwapContract","type":"address"},{"name":"theAmount","type":"uint256"}],"name":"kyberToUniSwapArb","outputs":[{"name":"","type":"bool"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"proxy","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"}];
   var priceContract = new web3.eth.Contract(arbAbi, contractAddr)
 
-priceContract.methods.getUniswapBuyPrice().call({
+priceContract.methods.getUniswapSellPrice().call({
   'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985' //change this
 
 },function(error, data){
-  console.log("Uniswap SAI Buy price is:")
+  console.log("Uniswap SAI Sell price is:")
   console.log(data)
-  saiPriceBuyUniswap = parseInt(data)
+  saiPriceSellUniswap = parseInt(data)
 })
 
 
- priceContract.methods.getKyberSellPrice().call({
+ priceContract.methods.getKyberBuyPrice().call({
   'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985' //change this
 
 },function(error, data){
-  console.log("Kyber SAI Sell price is:")
+  console.log("Kyber SAI Buy price is:")
   console.log(data)
-  saiPriceSellKyber =  parseInt(data)
+  saiPriceBuyKyber =  parseInt(data)
 })
 
 
@@ -166,7 +166,7 @@ function checkParameters(requiredParams, sentParams){
 
 setInterval(function(){
   console.log('checking to see if we should execute for arb')
-  if(saiPriceBuyUniswap < saiPriceSellKyber){
+  if(saiPriceSellUniswap > saiPriceBuyKyber){
     arbTrade();
   }
   else{
