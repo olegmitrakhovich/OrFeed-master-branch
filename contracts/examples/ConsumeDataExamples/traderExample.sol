@@ -1,5 +1,6 @@
 
 //example contract address: https://etherscan.io/address/0x1d6cbd79054b89ade7d840d1640a949ea82b7639#code
+//Rinkenby deployment address: https://rinkeby.etherscan.io/address/0xb009ba56d0e305498f81f28a0cf504de2c6f9032
 
 pragma solidity ^0.4.26;
 contract UniswapExchangeInterface {
