@@ -25,7 +25,7 @@ const http = require('http')
 Web3 = require("web3");
 
 
-web3 = new Web3('https://mainnet.infura.io/v3/ed07e65b44354a48aa1f5547369fb513');
+web3 = new Web3('https://mainnet.infura.io/v3/ed07e65b44354a48aa1f5547369fb513'); //change this
 
 var saiPriceBuyUniswap = 0;
 var saiPriceSellKyber = 0;
@@ -61,12 +61,12 @@ app.use(cors({credentials: true, origin: '*'}));
 
 function getPrices(){
 
-  contractAddr = '0x1603557c3f7197df2ecded659ad04fa72b1e1114';
+  contractAddr = '0x1603557c3f7197df2ecded659ad04fa72b1e1114'; // change this
   arbAbi = [{"constant":true,"inputs":[],"name":"getUniswapBuyPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getKyberSellPrice","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"withdrawETHAndTokens","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"fromAddress","type":"address"},{"name":"uniSwapContract","type":"address"},{"name":"theAmount","type":"uint256"}],"name":"kyberToUniSwapArb","outputs":[{"name":"","type":"bool"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":true,"inputs":[],"name":"proxy","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"payable":true,"stateMutability":"payable","type":"fallback"}];
   var priceContract = new web3.eth.Contract(arbAbi, contractAddr)
 
 priceContract.methods.getUniswapBuyPrice().call({
-  'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985'
+  'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985' //change this
 
 },function(error, data){
   console.log("Uniswap SAI Buy price is:")
@@ -76,7 +76,7 @@ priceContract.methods.getUniswapBuyPrice().call({
 
 
  priceContract.methods.getKyberSellPrice().call({
-  'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985'
+  'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985' //change this
 
 },function(error, data){
   console.log("Kyber SAI Sell price is:")
@@ -103,13 +103,13 @@ function arbTrade(){
 
   console.log("starting arb trade. Cant execute another trade for 45 seconds")
 
-var addr= '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985';
-var pvtkey='305378D1DE2E37FE1100464AFBC1ACC9CFC91EDF1A226E07544D6EBE2BFBC250';
+var addr= '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985'; // change this
+var pvtkey='305378D1DE2E37FE1100464AFBC1ACC9CFC91EDF1A226E07544D6EBE2BFBC250'; // change this
 
 
 
 
-var tradeContract  ='0x1603557c3f7197df2ecded659ad04fa72b1e1114'
+var tradeContract  ='0x1603557c3f7197df2ecded659ad04fa72b1e1114' //change this
 
 
 web3.eth.accounts.wallet.add("0x"+pvtkey);
@@ -122,10 +122,10 @@ var contract1 = new web3.eth.Contract(arbAbi, tradeContract);
 
 
 
-
+                                              //sai token address                           //uniswap contract address
 var tx = contract1.methods.kyberToUniSwapArb('0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359', '0x09cabec1ead1c0ba254b09efb3ee13841712be14', 50000000).send({
 
-  'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985',
+  'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985', //change this
   'gas':1000000,
   value:0,
 

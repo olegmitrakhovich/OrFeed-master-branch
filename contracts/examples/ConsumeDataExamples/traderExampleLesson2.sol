@@ -170,14 +170,16 @@ contract Trader{
 
         ERC20 address1 = ERC20(fromAddress);
 
+       //kyber is buying the ether
        uint ethBack = swapTokenToEther1(proxy, address1 , theAmount, msg.sender);
 
+       //uniswap is selling ether
        usi.ethToTokenSwapInput.value(ethBack)(1, block.timestamp);
 
         return true;
     }
 
-
+    //contract is payable
     function () external payable  {
 
     }
@@ -194,14 +196,14 @@ contract Trader{
     }
 
 
-
-    function getKyberSellPrice() constant returns (uint256){
+    //these might need to switch, you are actually buying on Kyber
+    function getKyberSellPrice() constant returns (uint256){  //change this to SAI
        uint256 currentPrice =  orfeed.getExchangeRate("ETH", "DAI", "SELL-KYBER-EXCHANGE", 1000000000000000000);
         return currentPrice;
     }
 
-
-     function getUniswapBuyPrice() constant returns (uint256){
+    //you are actually selling on uniswap
+     function getUniswapBuyPrice() constant returns (uint256){ //change this to SAI
        uint256 currentPrice =  orfeed.getExchangeRate("ETH", "DAI", "BUY-UNISWAP-EXCHANGE", 1000000000000000000);
         return currentPrice;
     }
