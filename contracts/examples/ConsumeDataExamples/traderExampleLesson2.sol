@@ -197,14 +197,14 @@ contract Trader{
 
 
     //these might need to switch, you are actually buying on Kyber
-    function getKyberSellPrice() constant returns (uint256){  //change this to SAI
-       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "SAI", "SELL-KYBER-EXCHANGE", 1000000000000000000);
+    function getKyberBuyPrice() constant returns (uint256){  //change this to SAI
+       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "SAI", "BUY-KYBER-EXCHANGE", 1000000000000000000);
         return currentPrice;
     }
 
     //you are actually selling on uniswap
-     function getUniswapBuyPrice() constant returns (uint256){ //change this to SAI
-       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "SAI", "BUY-UNISWAP-EXCHANGE", 1000000000000000000);
+     function getUniswapSellPrice() constant returns (uint256){ //change this to SAI
+       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "SAI", "SELL-UNISWAP-EXCHANGE", 1000000000000000000);
         return currentPrice;
     }
 
