@@ -198,7 +198,7 @@ contract Trader{
 
     //these might need to switch, you are actually buying on Kyber
     function getKyberBuyPrice() constant returns (uint256){  //change this to SAI
-       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "SAI", "BUY-KYBER-EXCHANGE", 1000000000000000000);
+       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "DAI", "BUY-KYBER-EXCHANGE", 1000000000000000000);
         return currentPrice;
     }
 
