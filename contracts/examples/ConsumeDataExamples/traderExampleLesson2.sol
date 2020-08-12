@@ -204,12 +204,13 @@ contract Trader{
 
     //you are actually selling on uniswap
      function getUniswapSellPrice() constant returns (uint256){ //change this to SAI
-       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "SAI", "SELL-UNISWAP-EXCHANGE", 1000000000000000000);
+       uint256 currentPrice =  orfeed.getExchangeRate("ETH", "DAI", "SELL-UNISWAP-EXCHANGE", 1000000000000000000);
         return currentPrice;
     }
 
-
-
+// uniswap ETH/SAI       kyber ETH/DAI
+// 280003243856770189122 378396678473357764391
+// 123456789012345678901 123456789012345678901
 
 
 }
