@@ -156,7 +156,7 @@ contract Trader{
 
        uint destAmount = proxy.tradeWithHint(ERC20(daiAddress), tokenQty, ERC20(0x00eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee), this, 8000000000000000000000000000000000000000000000000000000000000000, 0, 0x0000000000000000000000000000000000000004, PERM_HINT);
 
-    return destAmount;
+       return destAmount;
       //uint destAmount = proxy.swapTokenToEther(token, tokenQty, minRate);
 
         // Send received ethers to destination address
@@ -170,10 +170,10 @@ contract Trader{
 
         ERC20 address1 = ERC20(fromAddress);
 
-       //kyber is buying the ether
+       //buying sai on kyber
        uint ethBack = swapTokenToEther1(proxy, address1 , theAmount, msg.sender);
 
-       //uniswap is selling ether
+       //selling sai on uniswap
        usi.ethToTokenSwapInput.value(ethBack)(1, block.timestamp);
 
         return true;
