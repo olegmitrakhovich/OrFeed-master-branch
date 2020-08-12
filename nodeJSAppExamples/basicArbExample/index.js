@@ -122,7 +122,7 @@ var contract1 = new web3.eth.Contract(arbAbi, tradeContract);
 
 
 
-                                              //sai token address                           //uniswap contract address
+                                              //SAI token address                           //uniswap contract address
 var tx = contract1.methods.kyberToUniSwapArb('0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359', '0x09cabec1ead1c0ba254b09efb3ee13841712be14', 50000000).send({
 
   'from': '0xC0DcE374F9aC0607B432Be0b3439c5Dc84c8f985', //change this
